@@ -1,0 +1,9 @@
+# Ignore local audio recordings and scratch files
+*.wav
+*.flac
+*.mp3
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db

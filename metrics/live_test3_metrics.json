@@ -1,0 +1,262 @@
+{
+  "file": "C:\\Users\\1v\\.gemini\\antigravity\\scratch\\mic-eq\\live_test3.wav",
+  "sample_rate_hz": 48000,
+  "duration_sec": 19.5,
+  "dc_offset": 0.0,
+  "global_peak_dbfs": -4.33,
+  "global_rms_dbfs": -27.72,
+  "speech_rms_dbfs": -25.2,
+  "noise_floor_dbfs": -44.06,
+  "estimated_snr_db": 18.87,
+  "crest_factor_db": 20.86,
+  "clipped_samples": 0,
+  "speech_active_pct": 55.2,
+  "spectral_centroid_hz": 1268.7,
+  "spectral_rolloff_85_hz": 3000.0,
+  "spectral_rolloff_95_hz": 3480.5,
+  "effective_speech_bw_hz": 12500,
+  "hum_checks": {
+    "60Hz_excess_db": -0.35,
+    "100Hz_excess_db": -0.44,
+    "150Hz_excess_db": 0.15
+  },
+  "bands": {
+    "sub_rumble_20_80": {
+      "range_hz": [
+        20.0,
+        80.0
+      ],
+      "speech_density_db": -33.6,
+      "rel_to_mid_db": -18.42,
+      "noise_density_db": -37.77,
+      "band_snr_db": 4.17
+    },
+    "bass_80_200": {
+      "range_hz": [
+        80.0,
+        200.0
+      ],
+      "speech_density_db": -12.24,
+      "rel_to_mid_db": 2.94,
+      "noise_density_db": -32.4,
+      "band_snr_db": 20.16
+    },
+    "low_mid_mud_200_500": {
+      "range_hz": [
+        200.0,
+        500.0
+      ],
+      "speech_density_db": -11.29,
+      "rel_to_mid_db": 3.89,
+      "noise_density_db": -38.09,
+      "band_snr_db": 26.81
+    },
+    "mid_500_1200": {
+      "range_hz": [
+        500.0,
+        1200.0
+      ],
+      "speech_density_db": -14.86,
+      "rel_to_mid_db": 0.32,
+      "noise_density_db": -37.82,
+      "band_snr_db": 22.96
+    },
+    "upper_mid_1200_2500": {
+      "range_hz": [
+        1200.0,
+        2500.0
+      ],
+      "speech_density_db": -23.55,
+      "rel_to_mid_db": -8.37,
+      "noise_density_db": -42.51,
+      "band_snr_db": 18.96
+    },
+    "presence_2500_5000": {
+      "range_hz": [
+        2500.0,
+        5000.0
+      ],
+      "speech_density_db": -23.14,
+      "rel_to_mid_db": -7.96,
+      "noise_density_db": -39.67,
+      "band_snr_db": 16.53
+    },
+    "sibilance_5000_8000": {
+      "range_hz": [
+        5000.0,
+        8000.0
+      ],
+      "speech_density_db": -32.27,
+      "rel_to_mid_db": -17.09,
+      "noise_density_db": -44.38,
+      "band_snr_db": 12.11
+    },
+    "brilliance_8000_12000": {
+      "range_hz": [
+        8000.0,
+        12000.0
+      ],
+      "speech_density_db": -39.96,
+      "rel_to_mid_db": -24.78,
+      "noise_density_db": -47.64,
+      "band_snr_db": 7.68
+    },
+    "air_12000_16000": {
+      "range_hz": [
+        12000.0,
+        16000.0
+      ],
+      "speech_density_db": -41.0,
+      "rel_to_mid_db": -25.83,
+      "noise_density_db": -47.15,
+      "band_snr_db": 6.14
+    },
+    "ultra_16000_22000": {
+      "range_hz": [
+        16000.0,
+        22000.0
+      ],
+      "speech_density_db": -47.56,
+      "rel_to_mid_db": -32.38,
+      "noise_density_db": -47.97,
+      "band_snr_db": 0.41
+    }
+  },
+  "third_octave": {
+    "40": {
+      "speech_db": -35.7,
+      "rel_mid_db": -20.52,
+      "snr_db": 0.95
+    },
+    "50": {
+      "speech_db": -35.95,
+      "rel_mid_db": -20.77,
+      "snr_db": 3.22
+    },
+    "63": {
+      "speech_db": -29.97,
+      "rel_mid_db": -14.79,
+      "snr_db": 5.9
+    },
+    "80": {
+      "speech_db": -34.26,
+      "rel_mid_db": -19.08,
+      "snr_db": 4.63
+    },
+    "100": {
+      "speech_db": -10.98,
+      "rel_mid_db": 4.2,
+      "snr_db": 28.1
+    },
+    "125": {
+      "speech_db": -7.15,
+      "rel_mid_db": 8.03,
+      "snr_db": 24.49
+    },
+    "160": {
+      "speech_db": -22.83,
+      "rel_mid_db": -7.65,
+      "snr_db": 12.45
+    },
+    "200": {
+      "speech_db": -10.49,
+      "rel_mid_db": 4.69,
+      "snr_db": 19.19
+    },
+    "250": {
+      "speech_db": -13.09,
+      "rel_mid_db": 2.09,
+      "snr_db": 25.26
+    },
+    "315": {
+      "speech_db": -11.76,
+      "rel_mid_db": 3.42,
+      "snr_db": 28.62
+    },
+    "400": {
+      "speech_db": -10.61,
+      "rel_mid_db": 4.57,
+      "snr_db": 30.31
+    },
+    "500": {
+      "speech_db": -12.07,
+      "rel_mid_db": 3.11,
+      "snr_db": 27.0
+    },
+    "630": {
+      "speech_db": -11.1,
+      "rel_mid_db": 4.08,
+      "snr_db": 26.55
+    },
+    "800": {
+      "speech_db": -16.61,
+      "rel_mid_db": -1.43,
+      "snr_db": 19.86
+    },
+    "1000": {
+      "speech_db": -20.04,
+      "rel_mid_db": -4.86,
+      "snr_db": 18.09
+    },
+    "1250": {
+      "speech_db": -18.05,
+      "rel_mid_db": -2.87,
+      "snr_db": 21.97
+    },
+    "1600": {
+      "speech_db": -24.42,
+      "rel_mid_db": -9.24,
+      "snr_db": 18.58
+    },
+    "2000": {
+      "speech_db": -32.77,
+      "rel_mid_db": -17.59,
+      "snr_db": 10.56
+    },
+    "2500": {
+      "speech_db": -26.62,
+      "rel_mid_db": -11.44,
+      "snr_db": 16.87
+    },
+    "3150": {
+      "speech_db": -18.5,
+      "rel_mid_db": -3.32,
+      "snr_db": 18.51
+    },
+    "4000": {
+      "speech_db": -34.46,
+      "rel_mid_db": -19.28,
+      "snr_db": 7.21
+    },
+    "5000": {
+      "speech_db": -30.57,
+      "rel_mid_db": -15.39,
+      "snr_db": 10.81
+    },
+    "6300": {
+      "speech_db": -31.31,
+      "rel_mid_db": -16.13,
+      "snr_db": 13.17
+    },
+    "8000": {
+      "speech_db": -36.83,
+      "rel_mid_db": -21.65,
+      "snr_db": 9.79
+    },
+    "10000": {
+      "speech_db": -39.41,
+      "rel_mid_db": -24.23,
+      "snr_db": 8.36
+    },
+    "12500": {
+      "speech_db": -40.64,
+      "rel_mid_db": -25.46,
+      "snr_db": 7.42
+    },
+    "16000": {
+      "speech_db": -44.71,
+      "rel_mid_db": -29.53,
+      "snr_db": 2.51
+    }
+  }
+}
