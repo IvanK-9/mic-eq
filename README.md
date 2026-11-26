@@ -36,6 +36,7 @@
 - [windows/mic-top.txt](windows/mic-top.txt) — финальный профиль под размещение **сверху на мониторе**.
 - [windows/mic-bottom.txt](windows/mic-bottom.txt) — профиль под размещение **под монитором / на столе**.
 - [linux/99-webcam-eq.conf](linux/99-webcam-eq.conf) — нативный профиль для **PipeWire `filter-chain`** на Linux.
+- [linux/AGENT_INSTALL.md](linux/AGENT_INSTALL.md) — пошаговый runbook для AI-агента по автоматической установке, маршрутизации и проверке на Linux.
 - [metrics/](metrics/) — сохранённые JSON-метрики замеров.
 
 ---
@@ -78,6 +79,8 @@ Copy-Item .\windows\mic-top.txt "C:\Program Files\EqualizerAPO\config\mic.txt" -
 ---
 
 ## Настройка на Linux (на том же железе)
+
+> **Для AI-агента:** подробный детерминированный runbook с командами диагностики, привязкой `target.object` и живой верификацией лежит в [linux/AGENT_INSTALL.md](linux/AGENT_INSTALL.md).
 
 На современном Linux (Ubuntu 22.10+, Fedora, Arch, Debian 12+) используются те же самые биквадратные фильтры через **PipeWire** — без стороннего софта, без задержки и системно для всех программ.
 
