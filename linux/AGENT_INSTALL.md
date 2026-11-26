@@ -1,6 +1,6 @@
-# Инструкция для AI-агента: установка и настройка на Linux
+# Инструкция для AI-агента: установка и настройка на Linux (в т.ч. Omarchy / Arch)
 
-Этот файл предназначен для автономного запуска AI-агентом в среде Linux (Ubuntu, Fedora, Arch, Debian и др.) на том же железе — USB-вебкамере `VID_0C45:PID_6301` (`USB Camera MIC`).
+Этот файл предназначен для автономного запуска AI-агентом в среде Linux (особенно **Omarchy / Arch + Hyprland + PipeWire + WirePlumber**, а также Ubuntu, Fedora, Debian) на том же железе — USB-вебкамере `VID_0C45:PID_6301` (`USB Camera MIC`).
 
 Цель: развернуть **системную** обработку микрофона (работает во всех приложениях: Discord, Telegram, Zoom, браузер, OBS, игры) с минимальной задержкой, привязать к физическому устройству, выставить его микрофоном по умолчанию и проверить результат замером спектра.
 
@@ -8,10 +8,11 @@
 
 ## Правила для агента
 
-1. **Не угадывай имя устройства** — сначала получи точный идентификатор источника из PipeWire / PulseAudio (`pactl list short sources`, `wpctl status`).
+1. **Не угадывай имя устройства** — сначала получи точный идентификатор источника из PipeWire / WirePlumber (`wpctl status`, `pactl list short sources`).
 2. **Не создавай петлю маршрутизации:** в `linux/99-webcam-eq.conf` обязательно раскомментируй и задай `target.object` равным точному `node.name` физической вебкамеры (`alsa_input...`), прежде чем делать виртуальный источник `USB Camera MIC (EQ)` дефолтным.
-3. **Не ставь Python-пакеты глобально** (PEP 668): для `analyze_mic.py` используй системный `python3-numpy` или локальный `.venv`.
-4. **Не запускай запись микрофона внезапно** — перед записью предупреди пользователя, чтобы он успел помолчать 3 сек (шумовая полка) и сказать тестовую фразу.
+3. **Не ставь Python-пакеты через глобальный `pip`** (на Arch/Omarchy действует PEP 668): для `analyze_mic.py` используй либо системный пакет `python-numpy` (`sudo pacman -S --needed ffmpeg python-numpy`), либо локальный `.venv`.
+4. **На Omarchy / Arch всегда перезапускай вместе с `wireplumber`:** `systemctl --user restart pipewire pipewire-pulse wireplumber`.
+5. **Не запускай запись микрофона внезапно** — перед записью предупреди пользователя, чтобы он успел помолчать 3 сек (шумовая полка) и сказать тестовую фразу.
 
 ---
 
@@ -20,12 +21,12 @@
 Выполни диагностику:
 
 ```bash
-systemctl --user is-active pipewire pipewire-pulse
+systemctl --user is-active pipewire pipewire-pulse wireplumber
 pactl info | grep -E "Server Name|Default Source"
 lsusb | grep -i 0c45 || true
 ```
 
-- Если `pipewire` и `pipewire-pulse` активны — используй **основной сценарий (PipeWire `filter-chain`)** ниже.
+- Если `pipewire`, `pipewire-pulse` и `wireplumber` активны (стандарт для **Omarchy**) — используй сценарий ниже.
 - Если в системе чистый PulseAudio без PipeWire, предложи пользователю либо перейти на PipeWire, либо настроить EasyEffects/PulseEffects вручную по параметрам из `README.md`.
 
 ---
@@ -74,23 +75,23 @@ pactl list sources | grep -A 15 -E "Name: .*0c45|Name: .*USB_Camera"
 
 ## Шаг 4. Запуск, выбор по умолчанию и проверка логов
 
-Перезапусти пользовательский PipeWire и проверь, что нет ошибок в логах:
+Перезапусти пользовательский PipeWire **вместе с WirePlumber** и проверь, что нет ошибок в логах:
 
 ```bash
-systemctl --user restart pipewire pipewire-pulse
+systemctl --user restart pipewire pipewire-pulse wireplumber
 sleep 2
-systemctl --user is-active pipewire pipewire-pulse
-journalctl --user -u pipewire -n 30 --no-pager
+systemctl --user is-active pipewire pipewire-pulse wireplumber
+journalctl --user -u pipewire -u wireplumber -n 30 --no-pager
 ```
 
-Убедись, что появился виртуальный источник `USB Camera MIC (EQ)` (`filter_chain.webcam_eq_out`), и сделай его источником по умолчанию:
+Убедись, что появился виртуальный источник `USB Camera MIC (EQ)` (`filter_chain.webcam_eq_out`), и сделай его источником по умолчанию через `wpctl` (WirePlumber сохранит выбор после перезагрузки):
 
 ```bash
-pactl list short sources
-pactl set-default-source filter_chain.webcam_eq_out
-# или через wpctl:
-# wpctl status
-# wpctl set-default <ID_источника_USB_Camera_MIC_(EQ)>
+wpctl status
+# Найди ID источника "USB Camera MIC (EQ)" в разделе Audio -> Sources и выполни:
+wpctl set-default <ID_источника_USB_Camera_MIC_(EQ)>
+# Либо через Pulse-совместимый вызов:
+# pactl set-default-source filter_chain.webcam_eq_out
 ```
 
 Если установлен `pw-link`, проверь граф связей (вход цепочки должен быть подключён к аппаратному источнику вебкамеры):
@@ -108,7 +109,7 @@ pw-link -l | grep -A 3 -E "webcam_eq|0c45|USB_Camera" || true
    command -v ffmpeg
    python3 -c "import numpy; print(numpy.__version__)"
    ```
-   Если `numpy` нет, используй локальный `.venv` (`python3 -m venv .venv && .venv/bin/pip install numpy`).
+   Если `ffmpeg` или `numpy` отсутствуют на Omarchy / Arch, можно установить официальные пакеты (`sudo pacman -S --needed ffmpeg python-numpy`), либо для `numpy` создать локальный `.venv` (`python3 -m venv .venv && .venv/bin/pip install numpy`).
 2. Предупреди пользователя: **«Сейчас запущу 20-секундную запись: 3 секунды помолчи для замера шума, потом говори обычным голосом (включая слова со свистящими с/ш/щ)»**.
 3. После подтверждения пользователя запиши сигнал **с дефолтного источника** (`USB Camera MIC (EQ)`):
    ```bash

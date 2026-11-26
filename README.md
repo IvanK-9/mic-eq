@@ -99,9 +99,9 @@ Copy-Item .\windows\mic-top.txt "C:\Program Files\EqualizerAPO\config\mic.txt" -
    cp linux/99-webcam-eq.conf ~/.config/pipewire/pipewire.conf.d/99-webcam-eq.conf
    ```
    При необходимости раскомментируй `target.object = "..."` в файле и впиши туда имя источника из шага 1.
-4. **Перезапусти PipeWire:**
+4. **Перезапусти PipeWire (и WirePlumber на Arch/Omarchy):**
    ```bash
-   systemctl --user restart pipewire pipewire-pulse
+   systemctl --user restart pipewire pipewire-pulse wireplumber
    ```
 5. **Сделай виртуальный источник `USB Camera MIC (EQ)` микрофоном по умолчанию:**
    ```bash
